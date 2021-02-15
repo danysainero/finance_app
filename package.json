@@ -1,0 +1,23 @@
+{
+  "name": "finance_app",
+  "version": "1.0.0",
+  "description": "Finances web app with vanilla JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danysainero/finance_app.git"
+  },
+  "keywords": [
+    "finance"
+  ],
+  "author": "Manuel Pérez / Daniel Sainero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danysainero/finance_app/issues"
+  },
+  "homepage": "https://github.com/danysainero/finance_app#readme",
+  "dependencies": {}
+}
