@@ -11,28 +11,27 @@
 
 <body>
     <header>
-        <h1>
-            Finance App
-        </h1>
-        <ul>
-            <li>
-                <a href="#home">
-                    home
+        <nav class="navbar has-shadow has-background-primary-dark " role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a href="/"> 
+                <img src="./assets/images/logo.svg" alt="logo finanza">
                 </a>
-            </li>
-            <li>
-                <a href="#action">
-                    action
-                </a>
-            </li>
-            <li>
-                <a href="#graphics">
-                    graphics
-                </a>
-            </li>
-        </ul>
+                <div class="navbar-burger mt-1" data-target="navbar-menu">
+                    <span  class="has-text-weight-bold has-text-white"></span>
+                    <span  class="has-text-weight-bold has-text-white"></span>
+                    <span  class="has-text-weight-bold has-text-white"></span>
+                </div>
+            </div>
+            <div class="navbar-menu pr-4" id="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item has-text-black has-text-weight-medium" href="#home"> HOME </a>
+                    <a class="navbar-item has-text-black has-text-weight-medium" href="#action"> TRANSACTIONS </a>
+                    <a class="navbar-item has-text-black has-text-weight-medium" href="#graphics"> GRAPHICS </a>
+                </div>
+        </nav>
     </header>
-    <section id="router-outlet">
+
+    <section class="px-4 py-4" id="router-outlet">
     </section>
     <script type="module" src="app.js"></script>
 </body>
