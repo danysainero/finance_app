@@ -1,0 +1,8 @@
+.button.is-rounded{
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 50%;
+}

@@ -7,25 +7,28 @@
     <title>Finance App</title>
     <meta name="description" content="Simple Finance App">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="./assets/css/index.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar has-shadow has-background-primary-dark " role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a href="/"> 
-                <img src="./assets/images/logo.svg" alt="logo finanza">
+                <a href="/">
+                    <img src="./assets/images/logo.svg" alt="logo finanza">
                 </a>
                 <div class="navbar-burger mt-1" data-target="navbar-menu">
-                    <span  class="has-text-weight-bold has-text-white"></span>
-                    <span  class="has-text-weight-bold has-text-white"></span>
-                    <span  class="has-text-weight-bold has-text-white"></span>
+                    <span class="has-text-weight-bold has-text-white"></span>
+                    <span class="has-text-weight-bold has-text-white"></span>
+                    <span class="has-text-weight-bold has-text-white"></span>
                 </div>
             </div>
             <div class="navbar-menu pr-4" id="navbar-menu">
                 <div class="navbar-end">
                     <a class="navbar-item has-text-black has-text-weight-medium" href="#home"> HOME </a>
-                    <a class="navbar-item has-text-black has-text-weight-medium" href="#action"> TRANSACTIONS </a>
+                    <a class="navbar-item has-text-black has-text-weight-medium" href="#transactions"> TRANSACTIONS </a>
                     <a class="navbar-item has-text-black has-text-weight-medium" href="#graphics"> GRAPHICS </a>
                 </div>
         </nav>
@@ -33,6 +36,13 @@
 
     <section class="px-4 py-4" id="router-outlet">
     </section>
+
+    <a class="button is-rounded is-primary" id="add-btn">
+        <span class="icon">
+          <i class="fa fa-plus"></i>
+        </span>
+      </a>
+
     <script type="module" src="app.js"></script>
 </body>
 
