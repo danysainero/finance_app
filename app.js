@@ -1,6 +1,16 @@
 import { Router as router } from './routing/router.js';
+import { homeInit } from './pages/home.js';
 
-router(['home', 'transactions', 'graphics', 'action'], 'home', 'router-outlet');
+const noAction = () => {};
+
+const routes = {
+    home: homeInit,
+    transactions: noAction,
+    graphics: noAction,
+    action: noAction
+};
+
+router(routes, 'home', 'router-outlet');
 
 const navbarBurger = document.querySelector('.navbar-burger');
 const addButton = document.querySelector('#add-btn');
@@ -21,4 +31,3 @@ menuElements.forEach((el) => {
         navbarBurgerMenu.classList.toggle('is-active');
     })
 });
-
