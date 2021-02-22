@@ -1,12 +1,15 @@
-const loadPage = (pageName, routerOutletId) => {
+const loadPage = (pageName, routerOutletId, action) => {
     const element = document.getElementById(routerOutletId);
     const request = new XMLHttpRequest();
-    request.onload = () => replaceInnerHtmlWithNewPage(request, element);
+    request.onload = () => {
+        replaceInnerHtmlWithNewPage(request, element);
+        action();
+    };
     request.open("GET", `pages/${pageName}.html`, true);
     request.send();
 };
- 
- const replaceInnerHtmlWithNewPage = (response, element) => {
+
+const replaceInnerHtmlWithNewPage = (response, element) => {
     if (response.readyState === 4 && response.status === 200) {
         element.innerHTML = response.responseText;
     }
@@ -16,10 +19,11 @@ const getNewRoute = (routes, defaultRoute) =>
     routes.find(route => window.location.hash.replace("#", "") === route) ||
     defaultRoute;
 
-    export const Router = (routes, defaultRoute, routerOutletId) => {
-  
-    loadPage(getNewRoute(routes, defaultRoute), routerOutletId);
-    window.addEventListener("hashchange", () =>
-        loadPage(getNewRoute(routes, defaultRoute), routerOutletId)
-    );
+export const Router = (routes, defaultRoute, routerOutletId) => {
+    let newRoute = getNewRoute(Object.keys(routes), defaultRoute);
+    loadPage(newRoute, routerOutletId, routes[newRoute]);
+    window.addEventListener("hashchange", () => {
+        let newRoute = getNewRoute(Object.keys(routes), defaultRoute);
+        loadPage(newRoute, routerOutletId, routes[newRoute]);
+    });
 };
