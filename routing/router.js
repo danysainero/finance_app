@@ -2,7 +2,7 @@ const loadPage = (pageName, routerOutletId, action) => {
     const element = document.getElementById(routerOutletId);
     const request = new XMLHttpRequest();
     request.onload = () => {
-        replaceInnerHtmlWithNewPage(request, element, action);
+        replaceInnerHtmlWithNewPage(request, element);
         action();
     };
     request.open("GET", `pages/${pageName}.html`, true);
