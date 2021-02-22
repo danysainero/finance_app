@@ -19,7 +19,7 @@ const getNewRoute = (routes, defaultRoute) =>
     routes.find(route => window.location.hash.replace("#", "") === route) ||
     defaultRoute;
 
-export const Router = (routes, defaultRoute, routerOutletId, actions) => {
+export const Router = (routes, defaultRoute, routerOutletId) => {
     let newRoute = getNewRoute(Object.keys(routes), defaultRoute);
     loadPage(newRoute, routerOutletId, routes[newRoute]);
     window.addEventListener("hashchange", () => {
