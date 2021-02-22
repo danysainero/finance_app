@@ -1,3 +1,5 @@
+import MovementsProxy from '../proxys/movements-proxy.js'
+
 export const homeInit = () => {
     const balance = document.getElementById('balance');
     const previousMonthButton = document.getElementById('previous-month');
@@ -28,24 +30,32 @@ export const homeInit = () => {
     }
 
     function updateSelectedDate(date) {
-        selectedDate.innerHTML = date.toLocaleString('es', { month: 'long', year: 'numeric' });
+        selectedDate.innerHTML = date.toLocaleString('es', {
+            month: 'long',
+            year: 'numeric'
+        });
     }
 
-    function setCurrentBalance() {
-        let currentBalance = getCurrentBalance();
+    async function setCurrentBalance() {
+        let currentBalance = await getCurrentBalance();
         balance.innerHTML = currentBalance.toFixed(2);
+        
         if (currentBalance >= 0) {
             balance.classList.add('has-text-success');
             balance.classList.remove('has-text-danger');
-        }
-        else {
+        } else {
             balance.classList.remove('has-text-success');
             balance.classList.add('has-text-danger');
         }
     }
 
-    function getCurrentBalance() {
-        return Math.random() * 2000 - 1000;
+    async function getCurrentBalance() {
+        const movements = await MovementsProxy.getAllMovements();
+        let total = 0;
+        movements.forEach(element => {
+            total = element.type === "expense"? (total -= element.amount) : (total += element.amount)
+        });
+        return total;
     }
 
 };
