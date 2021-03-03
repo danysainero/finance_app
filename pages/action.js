@@ -11,12 +11,14 @@ export const actionInit = () => {
 
     formSubmit.addEventListener('click', () => {
 
-        const name = document.getElementById('name')
-        const price = document.getElementById('price')
-        const startDate = document.getElementById('startDate')
-        const endDate = document.getElementById('endDate')
+        const tag = document.getElementById('name').value
+        const amount = document.getElementById('price').value
+        const type = document.querySelector('input[name="movementType"]:checked').value
+        const recurrent = document.querySelector('input[name="periodicity"]:checked').value
+        const startDate = document.getElementById('startDate').value
+        const endDate = document.getElementById('endDate').value
 
-        console.log(name.value, price.value);
+console.log({tag, amount, type, recurrent, startDate, endDate });
 
     });
 
