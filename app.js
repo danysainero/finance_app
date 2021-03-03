@@ -1,5 +1,6 @@
 import { Router as router } from './routing/router.js';
 import { homeInit } from './pages/home.js';
+import { actionInit } from './pages/action.js';
 
 const noAction = () => {};
 
@@ -7,7 +8,7 @@ const routes = {
     home: homeInit,
     transactions: noAction,
     graphics: noAction,
-    action: noAction
+    action: actionInit
 };
 
 router(routes, 'home', 'router-outlet');

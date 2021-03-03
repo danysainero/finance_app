@@ -1,3 +1,63 @@
-<div >
-   view for action
-  </div>
+<div class="container is-max-desktop">
+    <form id="actionForm" action="">
+
+        <div class="field">
+            <label class="label">Movement</label>
+            <div class="control">
+                <label class="radio"><input name="movementType" type="radio" value="expense" checked/> INGRESO</label>
+                <label class="radio"><input name="movementType" type="radio" value="entry" /> GASTO </label>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Product name</label>
+            <div class="control">
+                <input type="text" class="input" name="name" id="name"/>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Amount</label>
+            <div class="field has-addons">
+                <div class="control">
+                    <span class="button is-static">€</span>
+                </div>
+                <div class="control">
+                    <input type="text" class="input" name="price" id="price"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Periodicity</label>
+            <div class="control">
+                <label class="radio"><input name="periodicity" type="radio" value="false" checked/> SINGLE </label>
+                <label class="radio"><input name="periodicity" type="radio" value="true" /> RECURRENT </label>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control is-flex">
+                <div  class="mr-3">
+                    <label class="label">Start Date</label>
+                    <input type="date" class="input" name="startDate" id="startDate" />
+                </div>
+                <div name="endDateContainer" class="hidden ml-3" >
+                    <label class="label">End Date</label>
+                    <input type="date" class="input " name="endDate" id="endDate"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <label class="label">Start - End Date</label>
+                <button class="button is-warning" type="button">Cancel</button>
+                <button class="button is-primary" type="button" id="formSubmit">Submit</button>
+            </div>
+            <div class="control">
+
+            </div>
+        </div>
+    </form>
+</div>
