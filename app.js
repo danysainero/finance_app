@@ -1,5 +1,5 @@
 import { Router as router } from './routing/router.js';
-import { homeInit } from './pages/home.js';
+import { homeInit } from './pages/home/home.js';
 
 const noAction = () => {};
 
@@ -29,5 +29,5 @@ menuElements.forEach((el) => {
     el.addEventListener('click', function () {
         const navbarBurgerMenu = document.querySelector('#navbar-menu');
         navbarBurgerMenu.classList.toggle('is-active');
-    })
+    });
 });
