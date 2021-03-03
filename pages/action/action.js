@@ -1,3 +1,6 @@
+import MovementsProxy from '../../proxys/movements-proxy.js';
+
+
 export const actionInit = () => {
 
     const periodicity = document.querySelectorAll('input[name="periodicity"]');
@@ -9,7 +12,7 @@ export const actionInit = () => {
         })
     })
 
-    formSubmit.addEventListener('click', () => {
+    formSubmit.addEventListener('click', async () => {
 
         const tag = document.getElementById('name').value
         const amount = document.getElementById('price').value
@@ -17,8 +20,7 @@ export const actionInit = () => {
         const recurrent = document.querySelector('input[name="periodicity"]:checked').value
         const startDate = document.getElementById('startDate').value
         const endDate = document.getElementById('endDate').value
-
-console.log({tag, amount, type, recurrent, startDate, endDate });
+       return await MovementsProxy.createMovement({tag, amount, type, recurrent, startDate, endDate });
 
     });
 

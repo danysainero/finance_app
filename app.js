@@ -1,10 +1,6 @@
 import { Router as router } from './routing/router.js';
-<<<<<<< HEAD
-import { homeInit } from './pages/home.js';
-import { actionInit } from './pages/action.js';
-=======
 import { homeInit } from './pages/home/home.js';
->>>>>>> c19d1dc4eb43b6232669d77cc6528475e7578ab0
+import { actionInit } from './pages/action/action.js';
 
 const noAction = () => {};
 

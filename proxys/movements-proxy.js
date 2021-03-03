@@ -8,11 +8,7 @@ const APIReqConfig = {};
 const MovementsProxy = {
 
     getAllMovements:  () => {
-<<<<<<< HEAD
-      return axios.get(APIurl + 'movements?month=2&year=2021')
-=======
       return axios.get(APIurl + 'movements', APIReqConfig)
->>>>>>> c19d1dc4eb43b6232669d77cc6528475e7578ab0
             .then(function (response) {
                 return response.data;
             })
@@ -24,6 +20,17 @@ const MovementsProxy = {
     getAllMovementsInMonth: (date) => {
         return axios.get(APIurl + 'movements?month=' + (date.getMonth() + 1) + '&year=' + date.getFullYear(), APIReqConfig)
         .then(function (response) {
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    createMovement: (movement) => {
+        return axios.post(APIurl + 'movements', movement)
+        .then(function (response) {
+            console.log(response.data);
             return response.data;
         })
         .catch(function (error) {
