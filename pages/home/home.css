@@ -1,0 +1,51 @@
+#global-state {
+    background-color: rgba(222, 219, 219, 0.57);
+}
+
+#balance {
+    font-size: 48px;
+}
+
+#selected-date {
+    color: #07977D;
+    font-size: 22px;
+}
+
+.arrow {
+    color: #C4C4C4;
+    cursor:pointer;
+}
+
+#movements-section {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    height: 100%;
+} 
+
+.movement {
+    border-top: 2px;
+    border-bottom: 2px;
+    border-left: 0px;
+    border-right: 0px;
+    border-color: black;
+    border-style: solid;
+}
+
+.movement-amount {
+    font-family:'Sans';
+    font-size: 24px;
+    color: #5A5959;
+}
+
+.edit-movement-button {
+    margin: 10px;
+    visibility: hidden;
+}
+
+.movement:hover .edit-movement-button {
+    cursor: pointer;
+    visibility: visible;
+}

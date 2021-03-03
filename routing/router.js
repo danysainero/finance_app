@@ -5,7 +5,7 @@ const loadPage = (pageName, routerOutletId, action) => {
         replaceInnerHtmlWithNewPage(request, element);
         action();
     };
-    request.open("GET", `pages/${pageName}.html`, true);
+    request.open("GET", `pages/${pageName}/${pageName}.html`, true);
     request.send();
 };
 
