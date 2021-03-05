@@ -53,13 +53,23 @@ export const homeInit = () => {
 
     function createMovementListElement(movement) {
         let amount = (movement.type === 'entry') ? movement.amount : -movement.amount;
-        amount = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', signDisplay: 'always' }).format(amount);
+        amount = new Intl.NumberFormat('es-ES', {
+            style: 'currency',
+            currency: 'EUR',
+            signDisplay: 'always'
+        }).format(amount);
         const tr = document.createElement('tr');
         tr.id = movement._id;
         tr.className = 'movement';
-        tr.innerHTML = `<td>${dateOf(movement)}</td><td class="has-text-right movement-amount">${amount}<span class="icon edit-movement-button"><i class="fa fa-edit"></i></span></td>`;
+        tr.innerHTML = `
+        <td>${movement.recurrent === true ? 'Recurrent' : dateOf(movement)}</td>
+        <td>${movement.tag}</td>
+        <td class="has-text-right movement-amount">
+        ${amount}
+        <span class="icon edit-movement-button"><i class="fa fa-edit"></i></span>
+        </td>`;
         tr.style.background = (movement.type === 'expense') ? '#F6DEDE' : 'rgba(0, 255, 209, 0.22)';
-        tr.addEventListener('mouseover', () => { })
+        tr.addEventListener('mouseover', () => {})
         return tr;
     }
 
@@ -74,7 +84,11 @@ export const homeInit = () => {
 
     async function setCurrentBalance(date) {
         let currentBalance = await getCurrentBalance(date);
-        const balanceFormat = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', signDisplay: 'always' });
+        const balanceFormat = new Intl.NumberFormat('es-ES', {
+            style: 'currency',
+            currency: 'EUR',
+            signDisplay: 'always'
+        });
         balance.innerHTML = balanceFormat.format(currentBalance);
 
         if (currentBalance >= 0) {
@@ -103,8 +117,7 @@ export const homeInit = () => {
             const dateB = new Date(b.createdAt);
             if (dateA > dateB) {
                 return 1;
-            }
-            else {
+            } else {
                 return -1;
             }
         });

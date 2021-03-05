@@ -25,6 +25,17 @@ const MovementsProxy = {
         .catch(function (error) {
             console.log(error);
         });
+    },
+
+    createMovement: (movement) => {
+        return axios.post(APIurl + 'movements', movement)
+        .then(function (response) {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 };
 
