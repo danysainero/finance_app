@@ -21,8 +21,14 @@ export const actionInit = () => {
         let startDate = document.getElementById('startDate').value
         let endDate = document.getElementById('endDate').value
         
-        await MovementsProxy.createMovement({tag, amount, type, recurrent, startDate, endDate });
-        
+
+        startDate = new Date(startDate);
+        startDate.setDate( startDate.getDate() - 1 );
+        endDate = new Date(endDate);
+        endDate.setDate( endDate.getDate() + 1 );
+
+         await MovementsProxy.createMovement({tag, amount, type, recurrent, startDate, endDate });
+
         location.replace("http://localhost:5500/#home");
     });
 

@@ -1,4 +1,5 @@
 @import '/pages/home/home.css';
+@import '/pages/action/action.css';
 
 .button.is-rounded{
   height: 50px;
