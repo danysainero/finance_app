@@ -1,6 +1,13 @@
 @import '/pages/home/home.css';
 @import '/pages/action/action.css';
 
+header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 3;
+}
+
 .button.is-rounded{
   height: 50px;
   width: 50px;
