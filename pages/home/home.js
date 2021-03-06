@@ -5,29 +5,11 @@ export const homeInit = () => {
     const previousMonthButton = document.getElementById('previous-month');
     const nextMonthButton = document.getElementById('next-month');
     const selectedDate = document.getElementById('selected-date');
-
+    
     let currentDate = new Date();
     let movements = [];
     changeCurrentDate(currentDate);
-
-    nextMonthButton.addEventListener('click', () => {
-        selectNextMonth();
-    });
-
-    function selectNextMonth() {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        changeCurrentDate(currentDate);
-    }
-
-    previousMonthButton.addEventListener('click', () => {
-        selectPreviousMonth();
-    });
-
-    function selectPreviousMonth() {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        changeCurrentDate(currentDate);
-    }
-
+    
     async function changeCurrentDate(date) {
         movements = await getAllMovementsInMonth(date);
         setSelectedDate(date);
@@ -35,6 +17,19 @@ export const homeInit = () => {
         updateMovementsList(movements);
     }
 
+    async function getAllMovementsInMonth(date) {
+        const movements = await MovementsProxy.getAllMovementsInMonth(date);
+        console.log(movements);
+        return movements.sort((a, b) => {
+            const dateA = new Date(a.startDate);
+            const dateB = new Date(b.startDate);
+            if (dateA > dateB) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+    }
     function setSelectedDate(date) {
         const dateText = date.toLocaleString('es', {
             month: 'long',
@@ -42,6 +37,34 @@ export const homeInit = () => {
         });
         let searchDeResults = /(.*)de (.*)/.exec(dateText);
         selectedDate.innerHTML = searchDeResults[1] + searchDeResults[2];
+    }
+
+    function setCurrentBalance(movementsList) {
+        const currentBalance = computeCurrentBalance(movementsList);
+        const balanceFormat = new Intl.NumberFormat('es-ES', {
+            style: 'currency',
+            currency: 'EUR',
+            signDisplay: 'always'
+        });
+        balance.innerHTML = balanceFormat.format(currentBalance);
+
+        if (currentBalance >= 0) {
+            balance.classList.add('has-text-success');
+            balance.classList.remove('has-text-danger');
+        } else {
+            balance.classList.remove('has-text-success');
+            balance.classList.add('has-text-danger');
+        }
+    }
+
+    function computeCurrentBalance(movementsList) {
+        let total = 0;
+        console.log(movementsList);
+        movementsList.forEach(element => {
+            console.log(`Adding ${element.amount}... ${total}`);
+            total = element.type === "expense" ? (total -= element.amount) : (total += element.amount);
+        });
+        return total;
     }
 
     async function updateMovementsList(date) {
@@ -81,46 +104,22 @@ export const homeInit = () => {
         return dateText;
     }
 
-    function setCurrentBalance(movementsList) {
-        let currentBalance = computeCurrentBalance(movementsList);
-        console.log(currentBalance);
-        const balanceFormat = new Intl.NumberFormat('es-ES', {
-            style: 'currency',
-            currency: 'EUR',
-            signDisplay: 'always'
-        });
-        balance.innerHTML = balanceFormat.format(currentBalance);
+    nextMonthButton.addEventListener('click', () => {
+        selectNextMonth();
+    });    
 
-        if (currentBalance >= 0) {
-            balance.classList.add('has-text-success');
-            balance.classList.remove('has-text-danger');
-        } else {
-            balance.classList.remove('has-text-success');
-            balance.classList.add('has-text-danger');
-        }
-    }
+    function selectNextMonth() {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        changeCurrentDate(currentDate);
+    }    
 
-    function computeCurrentBalance(movementsList) {
-        let total = 0;
-        console.log(movementsList);
-        movementsList.forEach(element => {
-            console.log(`Adding ${element.amount}... ${total}`);
-            total = element.type === "expense" ? (total -= element.amount) : (total += element.amount);
-        });
-        return total;
-    }
+    previousMonthButton.addEventListener('click', () => {
+        selectPreviousMonth();
+    });    
 
-    async function getAllMovementsInMonth(date) {
-        const movements = await MovementsProxy.getAllMovementsInMonth(date);
-        console.log(movements);
-        return movements.sort((a, b) => {
-            const dateA = new Date(a.createdAt);
-            const dateB = new Date(b.createdAt);
-            if (dateA > dateB) {
-                return 1;
-            } else {
-                return -1;
-            }
-        });
-    }
+    function selectPreviousMonth() {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        changeCurrentDate(currentDate);
+    }    
+
 };
