@@ -116,9 +116,6 @@ export const homeInit = () => {
         return dateText;
     }
 
-    function saveToSessionStorage(movement) {
-    }
-
     nextMonthButton.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
         changeCurrentDate(currentDate);
