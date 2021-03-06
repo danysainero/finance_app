@@ -14,7 +14,7 @@ export const homeInit = () => {
         movements = await getAllMovementsInMonth(date);
         setSelectedDate(date);
         setCurrentBalance(movements);
-        updateMovementsList(movements);
+        createMovementsList(movements);
     }
 
     async function getAllMovementsInMonth(date) {
@@ -59,15 +59,13 @@ export const homeInit = () => {
 
     function computeCurrentBalance(movementsList) {
         let total = 0;
-        console.log(movementsList);
         movementsList.forEach(element => {
-            console.log(`Adding ${element.amount}... ${total}`);
             total = element.type === "expense" ? (total -= element.amount) : (total += element.amount);
         });
         return total;
     }
 
-    async function updateMovementsList(date) {
+    async function createMovementsList(date) {
         const movementsList = document.getElementById("movements-list");
         movementsList.innerHTML = "";
         movements.forEach(movement => movementsList.append(createMovementListElement(movement)));
@@ -105,21 +103,13 @@ export const homeInit = () => {
     }
 
     nextMonthButton.addEventListener('click', () => {
-        selectNextMonth();
-    });    
-
-    function selectNextMonth() {
         currentDate.setMonth(currentDate.getMonth() + 1);
         changeCurrentDate(currentDate);
-    }    
-
-    previousMonthButton.addEventListener('click', () => {
-        selectPreviousMonth();
     });    
 
-    function selectPreviousMonth() {
+    previousMonthButton.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         changeCurrentDate(currentDate);
-    }    
+    });    
 
 };
