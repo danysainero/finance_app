@@ -7,9 +7,8 @@ export const homeInit = () => {
     const selectedDate = document.getElementById('selected-date');
 
     let currentDate = new Date();
-
-    setCurrentBalance(currentDate);
-    updateCurrentDate(currentDate);
+    let movements = [];
+    changeCurrentDate(currentDate);
 
     nextMonthButton.addEventListener('click', () => {
         selectNextMonth();
@@ -17,7 +16,7 @@ export const homeInit = () => {
 
     function selectNextMonth() {
         currentDate.setMonth(currentDate.getMonth() + 1);
-        updateCurrentDate(currentDate);
+        changeCurrentDate(currentDate);
     }
 
     previousMonthButton.addEventListener('click', () => {
@@ -26,13 +25,14 @@ export const homeInit = () => {
 
     function selectPreviousMonth() {
         currentDate.setMonth(currentDate.getMonth() - 1);
-        updateCurrentDate(currentDate);
+        changeCurrentDate(currentDate);
     }
 
-    function updateCurrentDate(date) {
+    async function changeCurrentDate(date) {
+        movements = await getAllMovementsInMonth(date);
         setSelectedDate(date);
-        setCurrentBalance(date);
-        updateMovementsList(date);
+        setCurrentBalance(movements);
+        updateMovementsList(movements);
     }
 
     function setSelectedDate(date) {
@@ -47,7 +47,6 @@ export const homeInit = () => {
     async function updateMovementsList(date) {
         const movementsList = document.getElementById("movements-list");
         movementsList.innerHTML = "";
-        const movements = await getAllMovementsInMonth(date);
         movements.forEach(movement => movementsList.append(createMovementListElement(movement)));
     }
 
@@ -69,7 +68,7 @@ export const homeInit = () => {
         <span class="icon edit-movement-button"><i class="fa fa-edit"></i></span>
         </td>`;
         tr.style.background = (movement.type === 'expense') ? '#F6DEDE' : 'rgba(0, 255, 209, 0.22)';
-        tr.addEventListener('mouseover', () => {})
+        tr.addEventListener('mouseover', () => { })
         return tr;
     }
 
@@ -82,8 +81,9 @@ export const homeInit = () => {
         return dateText;
     }
 
-    async function setCurrentBalance(date) {
-        let currentBalance = await getCurrentBalance(date);
+    function setCurrentBalance(movementsList) {
+        let currentBalance = computeCurrentBalance(movementsList);
+        console.log(currentBalance);
         const balanceFormat = new Intl.NumberFormat('es-ES', {
             style: 'currency',
             currency: 'EUR',
@@ -100,11 +100,11 @@ export const homeInit = () => {
         }
     }
 
-    async function getCurrentBalance(date) {
-        const movementsJSON = await MovementsProxy.getAllMovementsInMonth(date);
-        const movements = Object.values(movementsJSON);
+    function computeCurrentBalance(movementsList) {
         let total = 0;
-        movements.forEach(element => {
+        console.log(movementsList);
+        movementsList.forEach(element => {
+            console.log(`Adding ${element.amount}... ${total}`);
             total = element.type === "expense" ? (total -= element.amount) : (total += element.amount);
         });
         return total;
@@ -112,6 +112,7 @@ export const homeInit = () => {
 
     async function getAllMovementsInMonth(date) {
         const movements = await MovementsProxy.getAllMovementsInMonth(date);
+        console.log(movements);
         return movements.sort((a, b) => {
             const dateA = new Date(a.createdAt);
             const dateB = new Date(b.createdAt);
