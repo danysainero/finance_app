@@ -40,12 +40,12 @@
     color: #5A5959;
 }
 
-.edit-movement-button {
+.movement-button {
     margin: 10px;
     visibility: hidden;
 }
 
-.movement:hover .edit-movement-button {
+.movement:hover .movement-button {
     cursor: pointer;
     visibility: visible;
 }

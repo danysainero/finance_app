@@ -86,10 +86,13 @@ export const homeInit = () => {
         <td>${movement.tag}</td>
         <td class="has-text-right movement-amount">
         ${amount}
-        <span class="icon edit-movement-button"><i class="fa fa-edit"></i></span>
+        </td>
+        <td>
+        <span class="icon movement-button"><i class="fa fa-edit fa-2x"></i></span>
+        ${movement.recurrent === true ? '' : '<span class="icon movement-button"><i class="fa fa-trash-o fa-2x"></i></span>'}
         </td>`;
         tr.style.background = (movement.type === 'expense') ? '#F6DEDE' : 'rgba(0, 255, 209, 0.22)';
-        tr.addEventListener('mouseover', () => { })
+        tr.addEventListener('mouseover', () => { });
         return tr;
     }
 
