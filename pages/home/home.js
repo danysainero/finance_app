@@ -5,21 +5,20 @@ export const homeInit = () => {
     const previousMonthButton = document.getElementById('previous-month');
     const nextMonthButton = document.getElementById('next-month');
     const selectedDate = document.getElementById('selected-date');
-    
+
     let currentDate = new Date();
     let movements = [];
     changeCurrentDate(currentDate);
-    
+
     async function changeCurrentDate(date) {
         movements = await getAllMovementsInMonth(date);
         setSelectedDate(date);
         setCurrentBalance(movements);
-        createMovementsList(movements);
+        setMovementsList(movements);
     }
 
     async function getAllMovementsInMonth(date) {
         const movements = await MovementsProxy.getAllMovementsInMonth(date);
-        console.log(movements);
         return movements.sort((a, b) => {
             const dateA = new Date(a.startDate);
             const dateB = new Date(b.startDate);
@@ -65,7 +64,7 @@ export const homeInit = () => {
         return total;
     }
 
-    async function createMovementsList(date) {
+    function setMovementsList(movements) {
         const movementsList = document.getElementById("movements-list");
         movementsList.innerHTML = "";
         movements.forEach(movement => movementsList.append(createMovementListElement(movement)));
@@ -88,11 +87,23 @@ export const homeInit = () => {
         ${amount}
         </td>
         <td>
-        <span class="icon movement-button"><i class="fa fa-edit fa-2x"></i></span>
-        ${movement.recurrent === true ? '' : '<span class="icon movement-button"><i class="fa fa-trash-o fa-2x"></i></span>'}
+        <span class="icon movement-button"><i class="fa fa-edit fa-2x edit-button"></i></span>
+        ${movement.recurrent === true ?
+                '' :
+                `<span class="icon movement-button"><i class="fa fa-trash-o fa-2x delete-button delete-button"></i></span>`}
         </td>`;
         tr.style.background = (movement.type === 'expense') ? '#F6DEDE' : 'rgba(0, 255, 209, 0.22)';
-        tr.addEventListener('mouseover', () => { });
+        tr.addEventListener('click', (event) => {
+            if (event.target.classList.contains('edit-button')) {
+                sessionStorage.setItem(0, JSON.stringify(movement));
+                location.replace('http://localhost:5500/#action');
+            }
+            else if (event.target.classList.contains('delete-button')) {
+                movements = movements.filter(element => element._id != tr.id);
+                setMovementsList(movements);
+                MovementsProxy.deleteMovement(tr.id);
+            }
+        });
         return tr;
     }
 
@@ -105,14 +116,17 @@ export const homeInit = () => {
         return dateText;
     }
 
+    function saveToSessionStorage(movement) {
+    }
+
     nextMonthButton.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() + 1);
         changeCurrentDate(currentDate);
-    });    
+    });
 
     previousMonthButton.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         changeCurrentDate(currentDate);
-    });    
+    });
 
 };

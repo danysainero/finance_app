@@ -32,6 +32,17 @@ const MovementsProxy = {
         .catch(function (error) {
             console.log(error);
         });
+    },
+
+    deleteMovement: (movementId) => {
+        return axios.delete(APIurl + 'movements/' + movementId)
+        .then(function (response) {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 };
 
