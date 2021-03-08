@@ -1,6 +1,7 @@
 import MovementsProxy from '../../proxys/movements-proxy.js';
 
 export const homeInit = () => {
+    sessionStorage.clear();
     const balance = document.getElementById('balance');
     const previousMonthButton = document.getElementById('previous-month');
     const nextMonthButton = document.getElementById('next-month');
@@ -18,8 +19,8 @@ export const homeInit = () => {
     }
 
     async function getAllMovementsInMonth(date) {
-        const movements = await MovementsProxy.getAllMovementsInMonth(date);
-        return movements.sort((a, b) => {
+        return await MovementsProxy.getAllMovementsInMonth(date);
+       /*  return movements.sort((a, b) => {
             const dateA = new Date(a.startDate);
             const dateB = new Date(b.startDate);
             if (dateA > dateB) {
@@ -27,8 +28,9 @@ export const homeInit = () => {
             } else {
                 return -1;
             }
-        });
+        }); */
     }
+    
     function setSelectedDate(date) {
         const dateText = date.toLocaleString('es', {
             month: 'long',
@@ -95,7 +97,7 @@ export const homeInit = () => {
         tr.style.background = (movement.type === 'expense') ? '#F6DEDE' : 'rgba(0, 255, 209, 0.22)';
         tr.addEventListener('click', (event) => {
             if (event.target.classList.contains('edit-button')) {
-                sessionStorage.setItem(0, JSON.stringify(movement));
+                sessionStorage.setItem('movement', JSON.stringify(movement));
                 location.replace('http://localhost:5500/#action');
             }
             else if (event.target.classList.contains('delete-button')) {

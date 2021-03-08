@@ -26,7 +26,6 @@ const MovementsProxy = {
     createMovement: (movement) => {
         return axios.post(APIurl + 'movements', movement)
         .then(function (response) {
-            console.log(response.data);
             return response.data;
         })
         .catch(function (error) {
@@ -37,7 +36,16 @@ const MovementsProxy = {
     deleteMovement: (movementId) => {
         return axios.delete(APIurl + 'movements/' + movementId)
         .then(function (response) {
-            console.log(response.data);
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    updateMovement: (movementId, movement) => {
+        return axios.patch(APIurl + 'movements/' + movementId, movement)
+        .then(function (response) {
             return response.data;
         })
         .catch(function (error) {
