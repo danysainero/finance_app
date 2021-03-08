@@ -4,7 +4,7 @@
         <div class="field">
             <label class="label">Movement type</label>
             <div class="control">
-                <label class="radio"><input name="movementType" type="radio" value="entry" checked/> INGRESO</label>
+                <label class="radio"><input name="movementType" type="radio" value="entry" checked /> INGRESO</label>
                 <label class="radio"><input name="movementType" type="radio" value="expense" /> GASTO </label>
             </div>
         </div>
@@ -12,7 +12,7 @@
         <div class="field">
             <label class="label">Product name</label>
             <div class="control">
-                <input type="text" class="input" name="name" id="name"/>
+                <input type="text" class="input" name="name" id="name" required/>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                     <span class="button is-static">€</span>
                 </div>
                 <div class="control">
-                    <input type="text" class="input" name="price" id="price"/>
+                    <input type="number" class="input" name="price" id="price" required/>
                 </div>
             </div>
         </div>
@@ -31,18 +31,18 @@
         <div class="field">
             <label class="label">Periodicity</label>
             <div class="control">
-                <label class="radio"><input name="periodicity" type="radio" value="false" checked/> SINGLE </label>
-                <label class="radio"><input name="periodicity" type="radio" value="true" /> RECURRENT </label>
+                <label class="radio"><input name="periodicity" type="radio" value="false" id="single" checked/> SINGLE </label>
+                <label class="radio"><input name="periodicity" type="radio" value="true" id="recurrent" /> RECURRENT </label>
             </div>
         </div>
 
         <div class="field">
             <div class="control is-flex">
-                <div  class="mr-3">
+                <div class="mr-3">
                     <label class="label">Start Date</label>
-                    <input type="date" class="input" name="startDate" id="startDate" />
+                    <input type="date" class="input" name="startDate" id="startDate" required/>
                 </div>
-                <div name="endDateContainer" class="hidden ml-3" >
+                <div name="endDateContainer" class="hidden ml-3">
                     <label class="label">End Date</label>
                     <input type="date" class="input " name="endDate" id="endDate"/>
                 </div>
@@ -50,9 +50,12 @@
         </div>
 
         <div class="field">
-            <div class="control mt-6 pt-6">
-                <button class="button is-warning" type="button" id="cancel">Cancel</button>
-                <button class="button is-primary" type="button" id="formSubmit">Submit</button>
+            <div class="control mt-6 pt-6 is-flex is-justify-content-space-between">
+                <div>
+                    <button class="button is-warning" type="button" id="cancelButton">Cancel</button>
+                    <button class="button is-primary" type="submit" id="submitButton">Save</button>
+                </div>
+                <button class="button is-danger hidden" type="button" id="delete">Delete</button>
             </div>
             <div class="control">
 
