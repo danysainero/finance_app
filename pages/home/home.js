@@ -19,8 +19,8 @@ export const homeInit = () => {
     }
 
     async function getAllMovementsInMonth(date) {
-        return await MovementsProxy.getAllMovementsInMonth(date);
-       /*  return movements.sort((a, b) => {
+        const movements = await MovementsProxy.getAllMovementsInMonth(date);
+        return movements.sort((a, b) => {
             const dateA = new Date(a.startDate);
             const dateB = new Date(b.startDate);
             if (dateA > dateB) {
@@ -28,9 +28,9 @@ export const homeInit = () => {
             } else {
                 return -1;
             }
-        }); */
+        });
     }
-    
+
     function setSelectedDate(date) {
         const dateText = date.toLocaleString('es', {
             month: 'long',
@@ -83,24 +83,22 @@ export const homeInit = () => {
         tr.id = movement._id;
         tr.className = 'movement';
         tr.innerHTML = `
-        <td>${movement.recurrent === true ? 'Recurrent' : dateOf(movement)}</td>
-        <td>${movement.tag}</td>
+        <td class="movement-type">${movement.recurrent === true ? 'Recurrent' : dateOf(movement)}</td>
+        <td class="movement-tag">${movement.tag}</td>
         <td class="has-text-right movement-amount">
-        ${amount}
-        </td>
-        <td>
+        <span class="movement-amount-text"> ${amount} </span>
         <span class="icon movement-button"><i class="fa fa-edit fa-2x edit-button"></i></span>
         ${movement.recurrent === true ?
                 '' :
                 `<span class="icon movement-button"><i class="fa fa-trash-o fa-2x delete-button delete-button"></i></span>`}
+        
         </td>`;
         tr.style.background = (movement.type === 'expense') ? '#F6DEDE' : 'rgba(0, 255, 209, 0.22)';
         tr.addEventListener('click', (event) => {
             if (event.target.classList.contains('edit-button')) {
                 sessionStorage.setItem('movement', JSON.stringify(movement));
                 location.replace('http://localhost:5500/#action');
-            }
-            else if (event.target.classList.contains('delete-button')) {
+            } else if (event.target.classList.contains('delete-button')) {
                 movements = movements.filter(element => element._id != tr.id);
                 setMovementsList(movements);
                 MovementsProxy.deleteMovement(tr.id);
