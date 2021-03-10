@@ -1,10 +1,9 @@
 const APIurl = 'http://localhost:8081/api/';
-const APIReqConfig = {};
 
 const MovementsProxy = {
 
-    getAllMovements:  () => {
-      return axios.get(APIurl + 'movements', APIReqConfig)
+    getAllMovements:  (year) => {
+      return axios.get(APIurl + 'all-movements/' + year)
             .then(function (response) {
                 return response.data;
             })
@@ -14,8 +13,9 @@ const MovementsProxy = {
     },
 
     getAllMovementsInMonth: (date) => {
-        return axios.get(APIurl + 'movements?month=' + (date.getMonth() + 1) + '&year=' + date.getFullYear(), APIReqConfig)
+        return axios.get(APIurl + 'movements?month=' + (date.getMonth() + 1) + '&year=' + date.getFullYear())
         .then(function (response) {
+          
             return response.data;
         })
         .catch(function (error) {

@@ -1,5 +1,6 @@
 @import '/pages/home/home.css';
 @import '/pages/action/action.css';
+@import '/pages/graphics/graphics.css';
 
 header {
   position: fixed;

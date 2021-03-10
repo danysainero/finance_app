@@ -1,13 +1,13 @@
 import { Router as router } from './routing/router.js';
 import { homeInit } from './pages/home/home.js';
 import { actionInit } from './pages/action/action.js';
+import { graphicsInit } from './pages/graphics/graphics.js';
 
 const noAction = () => {};
 
 const routes = {
     home: homeInit,
-    transactions: noAction,
-    graphics: noAction,
+    graphics: graphicsInit,
     action: actionInit
 };
 

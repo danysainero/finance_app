@@ -1,69 +1,125 @@
 #global-state {
-    background-color: rgba(222, 219, 219);
-    position: fixed;
-    top: 70px;
-    width: 100%;
-    z-index: 2;
+  background-color: rgba(222, 219, 219);
+  position: fixed;
+  top: 70px;
+  width: 100%;
+  z-index: 2;
 }
 
 #balance {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 #selected-date {
-    color: #07977D;
-    font-size: 22px;
+  color: #07977d;
+  font-size: 22px;
 }
 
 .arrow {
-    color: #C4C4C4;
-    cursor:pointer;
+  color: #c4c4c4;
+  cursor: pointer;
 }
 
 #movements-section {
-    margin-top: 282px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-} 
+  margin-top: 282px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
 
 tbody {
-    width: 100%;
+  width: 100%;
 }
 
 .movement {
-    border-top: 2px;
-    border-bottom: 2px;
-    border-left: 0px;
-    border-right: 0px;
-    border-color: black;
-    border-style: solid;
+  border-bottom: 2px black solid;
 }
 
 .movement-amount {
-    font-family:'Sans';
-    font-size: 1.5em;
-    color: #5A5959;
+  font-family: "Sans";
+  font-size: 1.5em;
+  color: #5a5959;
 }
 
 .movement-button {
-    margin: 10px;
-    visibility: hidden;
+  margin: 10px;
+  cursor: pointer;
 }
 
-.movement:hover .movement-button {
-    cursor: pointer;
-    visibility: visible;
+@media (min-width: 769px) {
+  .movement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+  }
+
+  .movement-amount {
+    width: 350px;
+    display: flex;
+    justify-content: start;
+    margin-right: 70px;
+  }
+
+  .movement-amount-text {
+    font-size: 1.9rem;
+    margin-right: 20px;
+    text-align: left;
+    width: 130px;
+  }
+
+  .movement-button {
+    display: inline-block;
+    margin: 0 25px;
+  }
+
+  .movement-type {
+    font-size: 1.9rem;
+    text-align: center !important;
+    width: 20%;
+  }
+
+  .movement-tag {
+    font-size: 1.9rem;
+  }
 }
 
-@media screen and (max-width:768px) {
-    .movement-button {
-        cursor: pointer;
-        visibility: visible;
-    }
-    .movement-amount {
-        font-size: 1em;
-    }
+@media screen and (max-width: 768px) {
+  .movement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3px;
+  }
+  .movement-button {
+    margin: 4px;
+  }
+  .movement-amount {
+    font-size: 1.2em;
+    width: 150px;
+    display: flex;
+    justify-content: start;
+    font-weight: bolder;
+  }
+
+  .movement-type {
+    width: 25% !important;
+    text-align: center !important;
+  }
+
+  .movement-amount-text {
+    text-align: left;
+    width: 130px;
+  }
+
+  .movement-tag {
+    text-align: center !important;
+    width: 25%;
+  }
+
+  .fa-2x {
+    font-size: 1.1em !important;
+  }
 }
